@@ -122,3 +122,5 @@ def download(cid:str):
         c=db.get(Clip,cid)
         if not c or not Path(c.path).exists(): raise HTTPException(404,"Clip not found")
         return FileResponse(c.path,media_type="video/mp4",filename=f"ClipNow-{c.id}.mp4")
+from fastapi.staticfiles import StaticFiles
+app.mount("/", StaticFiles(directory=str(BASE), html=True), name="site")
